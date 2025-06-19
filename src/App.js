@@ -11,6 +11,7 @@ import { Page_Descs } from './pages/Page_Descs';
 import { Page_Cards } from './pages/Page_Cards';
 import { Page_Slider } from './pages/Page_Slider';
 import { Navigation_panel } from './components/Navigation/Navigation_panel';
+import { Page_take_order } from './pages/Page_take_order';
 
 function App() {
   const homeRef = useRef(null);
@@ -34,6 +35,7 @@ function App() {
       <Page_Descs ref={descsRef} />
       <Page_Cards ref={cardsRef} />
       <Page_Slider ref={sliderRef} />
+      {/* <Page_take_order /> */}
       <Arrow_up />
       <Footer />
     </main>

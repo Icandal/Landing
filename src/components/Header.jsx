@@ -12,7 +12,7 @@ const HeaderEl = styled.header`
   font-size: 1.2rem;
 `;
 
-const Wrapper = styled.title`
+const Wrapper = styled.p`
   display: flex;
   justify-content: center;
   align-items: center;
