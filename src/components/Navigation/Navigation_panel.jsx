@@ -11,7 +11,7 @@ import { Nav_to_order } from "./Navigate_to_order";
 const Container = styled.div`
   position: fixed;
   right: 0.4rem;
-  bottom: 20vh;
+  bottom: 24vh;
   border-radius: 16px;
   width: 4rem;
   height: 30vw;

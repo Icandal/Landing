@@ -12,6 +12,7 @@ import { Page_Cards } from './pages/Page_Cards';
 import { Page_Slider } from './pages/Page_Slider';
 import { Navigation_panel } from './components/Navigation/Navigation_panel';
 import { Page_take_order } from './pages/Page_take_order';
+import { Sign_up_btn } from './components/Sign_up_btn';
 
 function App() {
   const homeRef = useRef(null);
@@ -38,6 +39,7 @@ function App() {
       <Page_Cards ref={cardsRef} />
       <Page_Slider ref={sliderRef} />
       <Page_take_order ref={orderRef} />
+      <Sign_up_btn el={orderRef}/>
       <Arrow_up />
       <Footer />
     </main>

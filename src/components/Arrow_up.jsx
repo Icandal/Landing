@@ -9,7 +9,7 @@ const fadeIn = keyframes`
 
 const ScrollButton = styled.button`
   position: fixed;
-  bottom: 30px;
+  bottom: 95px;
   right: 10px;
   width: 50px;
   height: 50px;
