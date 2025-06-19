@@ -1,8 +1,11 @@
-export const Page_take_order = () => {
+import { forwardRef } from "react"
+import { Button } from "../components/Button";
+
+export const Page_take_order = forwardRef((props, ref) => {
 
     return(
-        <section className="Page">
-            Get_order_comp
+        <section ref={ref} className="Page">
+            <Button>Записаться</Button>
         </section>
     )
-};
+});

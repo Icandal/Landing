@@ -6,6 +6,7 @@ import { Nav_to_about } from "./Navigate_to_about";
 import { Nav_to_descs } from "./Navigate_to_descs";
 import { Nav_to_cards } from "./Navigate_to_cards";
 import { Nav_to_slider } from "./Navigate_to_slider";
+import { Nav_to_order } from "./Navigate_to_order";
 
 const Container = styled.div`
   position: fixed;
@@ -28,7 +29,7 @@ const Container = styled.div`
   
 `;
 
-export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, sliderRef}) => {
+export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, sliderRef, orderRef}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleToggle = () => {
@@ -52,6 +53,7 @@ export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, slider
         <Nav_to_descs onClick={() => handleScroll(descsRef)} />
         <Nav_to_cards onClick={() => handleScroll(cardsRef)} />
         <Nav_to_slider onClick={() => handleScroll(sliderRef)} />
+        <Nav_to_order onClick={() => handleScroll(orderRef)} />
       </Container>
     </nav>
   );

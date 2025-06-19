@@ -19,6 +19,7 @@ function App() {
   const descsRef = useRef(null);
   const cardsRef = useRef(null);
   const sliderRef = useRef(null);
+  const orderRef = useRef(null);
 
   return (
     <main className="App">
@@ -29,13 +30,14 @@ function App() {
         descsRef={descsRef}
         cardsRef={cardsRef}
         sliderRef={sliderRef}
+        orderRef={orderRef}
       />
       <Page_Home ref={homeRef} />
       <Page_About_Me ref={aboutRef} />
       <Page_Descs ref={descsRef} />
       <Page_Cards ref={cardsRef} />
       <Page_Slider ref={sliderRef} />
-      {/* <Page_take_order /> */}
+      <Page_take_order ref={orderRef} />
       <Arrow_up />
       <Footer />
     </main>
