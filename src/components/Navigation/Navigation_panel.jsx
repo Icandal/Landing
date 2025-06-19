@@ -44,7 +44,7 @@ export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, slider
 };
 
   return (
-    <>
+    <nav>
       <Navigation_btn onClick={handleToggle} isVisible={isVisible}/>
       <Container $isVisible={isVisible}>
         <Nav_to_home onClick={() => handleScroll(homeRef)} />
@@ -53,6 +53,6 @@ export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, slider
         <Nav_to_cards onClick={() => handleScroll(cardsRef)} />
         <Nav_to_slider onClick={() => handleScroll(sliderRef)} />
       </Container>
-    </>
+    </nav>
   );
 };

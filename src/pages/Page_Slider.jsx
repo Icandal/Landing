@@ -5,8 +5,8 @@ import './Page.css';
 export const Page_Slider = forwardRef((props, ref) => {
 
     return ( 
-        <div ref={ref} className='Page'>
+        <section ref={ref} className='Page'>
          <Slider />
-        </div>
+        </section>
     )
 });

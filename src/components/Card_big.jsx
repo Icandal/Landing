@@ -6,7 +6,7 @@ import { ShortProductDesc } from './ShortProductDesc';
 import { Circled_image } from './Circled_image';
 import icecreameImage from '../assets/Icecreame.png';
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   border: none;
   border-radius: 8px;
   padding: 2rem;
@@ -20,7 +20,7 @@ const Wrapper = styled.div`
   gap: 1rem;
 `;
 
-const DescriptionContainer = styled.div`
+const DescriptionContainer = styled.article`
   overflow: hidden;
   max-height: ${({ $isOpen }) => ($isOpen ? "500px" : "0")};
   opacity: ${({ $isOpen }) => ($isOpen ? "1" : "0")};

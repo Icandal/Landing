@@ -4,9 +4,9 @@ import './Page.css';
 
 export const Page_About_Me = forwardRef((props, ref) => {
     return (
-        <div className='Page' ref={ref}>
+        <section className='Page' ref={ref}>
             <AboutMe />
-        </div>
+        </section>
     );
 });
 

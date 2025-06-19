@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { Slider_block } from "./Slider_block";
 import { useState, useEffect, useRef } from "react";
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin: auto 5rem;
   display: flex;
   justify-content: center;

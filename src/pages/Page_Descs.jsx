@@ -14,13 +14,13 @@ const Wrapper = styled.div`
 export const Page_Descs = forwardRef((props, ref) => {
 
     return (
-        <div ref={ref} className='Page'>
+        <section ref={ref} className='Page'>
             <Wrapper>
                 {[...Array(3)].map((_, index) => (
                     <Card_big
                     key={`card-big-${index}`} />
                     ))}  
             </Wrapper>
-        </div>
+        </section>
     )
 });

@@ -20,7 +20,7 @@ function App() {
   const sliderRef = useRef(null);
 
   return (
-    <div className="App">
+    <main className="App">
       <Header />
       <Navigation_panel 
         homeRef={homeRef}
@@ -36,7 +36,7 @@ function App() {
       <Page_Slider ref={sliderRef} />
       <Arrow_up />
       <Footer />
-    </div>
+    </main>
   );
 }
 

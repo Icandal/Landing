@@ -17,7 +17,7 @@ const FooterContent = styled.div`
   padding: 0 1rem;
 `;
 
-const FooterSection = styled.div`
+const FooterSection = styled.section`
   h3 {
     color: #f1c40f;
     margin-bottom: 1rem;

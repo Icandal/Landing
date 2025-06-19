@@ -2,7 +2,7 @@ import { Circled_image } from './Circled_image';
 import styled from "styled-components";
 import icecreameImage from '../assets/Icecreame.png';
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   margin: 2rem;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,7 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Container = styled.div`
+const Container = styled.article`
   font-size: 20px;
   border: none;
   border-radius: 8px;

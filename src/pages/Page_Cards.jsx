@@ -13,13 +13,13 @@ const Wrapper = styled.div`
 
 export const Page_Cards = forwardRef((props, ref) => {
     return (
-        <div ref={ref} className="Page">
+        <section ref={ref} className="Page">
             <Wrapper>
                 {[...Array(5)].map((_, index) => (
                     <Card_small
                     key={`card-small-${index}`} />
                 ))}  
             </Wrapper>
-        </div>
+        </section>
     )
 });

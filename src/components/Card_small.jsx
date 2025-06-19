@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Circled_image } from './Circled_image';
 import icecreameImage from '../assets/Icecreame.png'
 
-const Wrapper = styled.div`
+const Wrapper = styled.section`
   border: none;
   border-radius: 8px;
   padding: 2rem;
