@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { Slider_block } from "./Slider_block";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Scorp from '../../assets/Sliders_assets/image.png';
 import Skull from '../../assets/Sliders_assets/Skull.png';
 import Vulpes from '../../assets/Sliders_assets/Vulpes_bottles.png';
@@ -120,6 +120,7 @@ export const Slider = () => {
   const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef(null);
   const wrapperRef = useRef(null);
+  const isScrollingRef = useRef(false);
 
   const goToNextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % 7);
@@ -133,44 +134,80 @@ export const Slider = () => {
     timerRef.current = setTimeout(goToNextSlide, 10000);
   };
 
+  // Функция для центрирования слайда
+  const centerSlide = useCallback((index) => {
+    if (!wrapperRef.current || !isMobile) return;
+    
+    const slideElement = wrapperRef.current.children[index];
+    if (!slideElement) return;
+    
+    const slideLeft = slideElement.offsetLeft;
+    const slideWidth = slideElement.offsetWidth;
+    const containerWidth = wrapperRef.current.offsetWidth;
+    const scrollLeft = slideLeft - (containerWidth - slideWidth) / 2;
+    
+    isScrollingRef.current = true;
+    wrapperRef.current.scrollTo({
+      left: scrollLeft,
+      behavior: 'smooth'
+    });
+    
+    // Сбрасываем флаг после завершения скролла
+    setTimeout(() => {
+      isScrollingRef.current = false;
+    }, 500);
+  }, [isMobile]);
+
   const handleClick = (index) => {
     setActiveIndex(index);
     resetTimer();
-    
-    if (isMobile && wrapperRef.current) {
-      const slideElement = wrapperRef.current.children[index];
-      if (slideElement) {
-        const slideLeft = slideElement.offsetLeft;
-        const slideWidth = slideElement.offsetWidth;
-        const containerWidth = wrapperRef.current.offsetWidth;
-        
-        wrapperRef.current.scrollTo({
-          left: slideLeft - (containerWidth - slideWidth) / 2,
-          behavior: 'smooth'
-        });
-      }
-    }
+    centerSlide(index);
   };
 
-  useEffect(() => {
-    if (isMobile && wrapperRef.current) {
-      const slideElement = wrapperRef.current.children[activeIndex];
-      if (slideElement) {
-        const slideLeft = slideElement.offsetLeft;
-        const slideWidth = slideElement.offsetWidth;
-        const containerWidth = wrapperRef.current.offsetWidth;
-        
-        wrapperRef.current.scrollTo({
-          left: slideLeft - (containerWidth - slideWidth) / 2,
-          behavior: 'smooth'
-        });
+  // Обработчик скролла для определения активного слайда
+  const handleScroll = useCallback(() => {
+    if (!wrapperRef.current || !isMobile || isScrollingRef.current) return;
+    
+    const container = wrapperRef.current;
+    const scrollLeft = container.scrollLeft;
+    const containerWidth = container.offsetWidth;
+    
+    let closestIndex = 0;
+    let minDistance = Infinity;
+    
+    // Находим слайд, ближайший к центру контейнера
+    Array.from(container.children).forEach((slide, index) => {
+      const slideLeft = slide.offsetLeft;
+      const slideWidth = slide.offsetWidth;
+      const slideCenter = slideLeft + slideWidth / 2;
+      const containerCenter = scrollLeft + containerWidth / 2;
+      const distance = Math.abs(slideCenter - containerCenter);
+      
+      if (distance < minDistance) {
+        minDistance = distance;
+        closestIndex = index;
       }
+    });
+    
+    if (closestIndex !== activeIndex) {
+      setActiveIndex(closestIndex);
+      resetTimer();
     }
-  }, [activeIndex, isMobile]);
+  }, [activeIndex, isMobile, resetTimer]);
+
+  useEffect(() => {
+    centerSlide(activeIndex);
+  }, [activeIndex, centerSlide]);
 
   useEffect(() => {
     const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768);
+      const mobile = window.innerWidth <= 768;
+      setIsMobile(mobile);
+      
+      // При изменении размера окна, перецентрируем активный слайд
+      if (mobile) {
+        centerSlide(activeIndex);
+      }
     };
 
     checkMobile();
@@ -179,7 +216,20 @@ export const Slider = () => {
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
-  }, []);
+  }, [activeIndex, centerSlide]);
+
+  useEffect(() => {
+    const wrapper = wrapperRef.current;
+    if (isMobile && wrapper) {
+      wrapper.addEventListener('scroll', handleScroll);
+    }
+    
+    return () => {
+      if (wrapper) {
+        wrapper.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [isMobile, handleScroll]);
 
   useEffect(() => {
     resetTimer();
