@@ -89,39 +89,81 @@ const FadeContainer = styled.div`
   overflow-y: auto;
 `;
 
-const Wrapper = styled.section`
-  position: static;
+const PageContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  // width: 100%;
-  margin: 0rem;
-
+  
   @media (min-width: 768px) {
-    position: absolute;
-    right: 0.5rem;
-    top: 2rem;
-    bottom: auto;
-    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+`;
+
+const MainContent = styled.div`
+  width: 100%;
+  
+  @media (min-width: 768px) {
+    width: 70%;
+  }
+`;
+
+const Sidebar = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  
+  @media (min-width: 768px) {
+    width: 28%;
     flex-direction: column;
-    width: auto;
-    padding: 0;
-    gap: 0.5rem;
+    align-items: flex-end;
+    margin-top: 0;
+    padding-top: 0.5rem;
   }
 `;
 
 const CardWrapper = styled.div`
   cursor: pointer;
   transition: transform 0.2s ease;
+  width: 150px;
 
   &:active {
     transform: scale(0.98);
   }
 
   @media (min-width: 768px) {
+    width: 100%;
+    max-width: 200px;
+    
     &:hover {
       transform: scale(1.03);
     }
+    
+    // Уменьшаем размер неактивных карточек
+    ${props => !props.$isActive && `
+      transform: scale(0.85);
+      margin-left: auto;
+      
+      &:hover {
+        transform: scale(0.9);
+      }
+    `}
+  }
+
+  @media (max-width: 767px) {
+    // На мобильных уменьшаем неактивные карточки
+    ${props => !props.$isActive && `
+      transform: scale(0.8);
+    `}
   }
 `;
 
@@ -148,23 +190,27 @@ export const Page_Cards = forwardRef((props, ref) => {
       <>
       <PageTitle>Что вы можете заказать сейчас?</PageTitle>
         <section ref={ref} className="Page" style={{ position: 'relative', padding: '0.5rem', minHeight: '100vh' }}>
-            <Wrapper_active>
-                <FadeContainer key={fadeKey}>
-                    <Active_card_small 
-                        imageRef={cardsData[activeIndex].image} 
-                        Cards_name={cardsData[activeIndex].title} 
-                        ACTIVE_CARD_TEXT={cardsData[activeIndex].description}
-                        price={cardsData[activeIndex].price}
-                        WebPImage={cardsData[activeIndex].WebPImage}
-                    />
-                </FadeContainer>
-            </Wrapper_active>
-
-            <Wrapper>
+          <PageContainer>
+            <MainContent>
+              <Wrapper_active>
+                  <FadeContainer key={fadeKey}>
+                      <Active_card_small 
+                          imageRef={cardsData[activeIndex].image} 
+                          Cards_name={cardsData[activeIndex].title} 
+                          ACTIVE_CARD_TEXT={cardsData[activeIndex].description}
+                          price={cardsData[activeIndex].price}
+                          WebPImage={cardsData[activeIndex].WebPImage}
+                      />
+                  </FadeContainer>
+              </Wrapper_active>
+            </MainContent>
+            
+            <Sidebar>
                 {cardsData.map((card, index) => (
                     <CardWrapper 
                         key={card.id}
                         onClick={() => handleCardClick(index)}
+                        $isActive={activeIndex === index}
                     >
                         <Card_small 
                             imageRef={card.image} 
@@ -175,7 +221,8 @@ export const Page_Cards = forwardRef((props, ref) => {
                         />
                     </CardWrapper>
                 ))}
-            </Wrapper>
+            </Sidebar>
+          </PageContainer>
         </section>
       </>
     );
