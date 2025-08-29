@@ -24,22 +24,102 @@ const Wrapper = styled.section`
   gap: 10px;
   height: 550px;
 
+  @media (max-width: 1024px) {
+    margin: auto 2rem;
+    height: 450px;
+    gap: 8px;
+  }
+
   @media (max-width: 768px) {
+    margin: auto 0.5rem;
+    height: 350px;
+    gap: 4px;
     overflow-x: auto;
-    height: 400px;
+    justify-content: flex-start;
+    padding: 0.5rem;
     
-    // Скрыть scrollbar
     &::-webkit-scrollbar {
       display: none;
     }
     -ms-overflow-style: none;
     scrollbar-width: none;
+    
+    scroll-snap-type: x mandatory;
+    scroll-padding: 0 50%;
+  }
+
+  @media (max-width: 480px) {
+    margin: auto 0.25rem;
+    height: 300px;
+    gap: 3px;
+    padding: 0.25rem;
+  }
+
+  @media (max-width: 360px) {
+    height: 280px;
+    gap: 2px;
+  }
+`;
+
+const NavigationDots = styled.div`
+  display: none;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 0.5rem;
+
+  @media (max-width: 768px) {
+    display: flex;
+  }
+
+  @media (max-width: 480px) {
+    gap: 8px;
+    margin-top: 0.5rem;
+    padding: 0.25rem;
+  }
+`;
+
+const Dot = styled.button`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${props => props.$active ? '#333' : '#ccc'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: ${props => props.$active ? '#333' : '#aaa'};
+  }
+
+  @media (max-width: 480px) {
+    width: 8px;
+    height: 8px;
+  }
+`;
+
+const SlideCounter = styled.div`
+  display: none;
+  font-size: 14px;
+  color: #666;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  text-align: center;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 12px;
   }
 `;
 
 export const Slider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef(null);
+  const wrapperRef = useRef(null);
 
   const goToNextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % 7);
@@ -56,7 +136,50 @@ export const Slider = () => {
   const handleClick = (index) => {
     setActiveIndex(index);
     resetTimer();
+    
+    if (isMobile && wrapperRef.current) {
+      const slideElement = wrapperRef.current.children[index];
+      if (slideElement) {
+        const slideLeft = slideElement.offsetLeft;
+        const slideWidth = slideElement.offsetWidth;
+        const containerWidth = wrapperRef.current.offsetWidth;
+        
+        wrapperRef.current.scrollTo({
+          left: slideLeft - (containerWidth - slideWidth) / 2,
+          behavior: 'smooth'
+        });
+      }
+    }
   };
+
+  useEffect(() => {
+    if (isMobile && wrapperRef.current) {
+      const slideElement = wrapperRef.current.children[activeIndex];
+      if (slideElement) {
+        const slideLeft = slideElement.offsetLeft;
+        const slideWidth = slideElement.offsetWidth;
+        const containerWidth = wrapperRef.current.offsetWidth;
+        
+        wrapperRef.current.scrollTo({
+          left: slideLeft - (containerWidth - slideWidth) / 2,
+          behavior: 'smooth'
+        });
+      }
+    }
+  }, [activeIndex, isMobile]);
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   useEffect(() => {
     resetTimer();
@@ -67,64 +190,46 @@ export const Slider = () => {
     };
   }, []);
 
+  const slides = [
+    { webp: WEBScorp, img: Scorp, alt: 'Scorpion image' },
+    { webp: WEBSkull, img: Skull, alt: 'Skull image' },
+    { webp: WEBVulpes, img: Vulpes, alt: 'Image of vulpes heart' },
+    { webp: WEBUrsus, img: Ursus, alt: 'Image of ursus testiculs' },
+    { webp: WEBLizzard, img: Lizzard, alt: 'Image of lizzard' },
+    { webp: WEBSpider, img: Spider, alt: 'Image of spider' },
+    { webp: WEBSnake, img: Snake, alt: 'Image of snake' }
+  ];
+
   return (
-    <Wrapper>
-        <Slider_block
-          key={0}
-          isActive={activeIndex === 0}
-          onClick={() => handleClick(0)}
-          webpimageRef={WEBScorp}
-          imageRef={Scorp}
-          Alt='Scorpion image'
-        />
-        <Slider_block
-          key={1}
-          isActive={activeIndex === 1}
-          onClick={() => handleClick(1)}
-          webpimageRef={WEBSkull}
-          imageRef={Skull}
-          Alt='Skull image'
-        />
-        <Slider_block
-          key={2}
-          isActive={activeIndex === 2}
-          onClick={() => handleClick(2)}
-          webpimageRef={WEBVulpes}
-          imageRef={Vulpes}
-          Alt='Image of vulpes heart'
-        />
-        <Slider_block
-          key={3}
-          isActive={activeIndex === 3}
-          onClick={() => handleClick(3)}
-          webpimageRef={WEBUrsus}
-          imageRef={Ursus}
-          Alt='Image of ursus testiculs'
-        />
-        <Slider_block
-          key={4}
-          isActive={activeIndex === 4}
-          onClick={() => handleClick(4)}
-          webpimageRef={WEBLizzard}
-          imageRef={Lizzard}
-          Alt='Image of lizzard'
-        />
-        <Slider_block
-          key={5}
-          isActive={activeIndex === 5}
-          onClick={() => handleClick(5)}
-          webpimageRef={WEBSpider}
-          imageRef={Spider}
-          Alt='Image of spider'
-        />
-        <Slider_block
-          key={6}
-          isActive={activeIndex === 6}
-          onClick={() => handleClick(6)}
-          webpimageRef={WEBSnake}
-          imageRef={Snake}
-          Alt='Image of snake'
-        />
-    </Wrapper>
+    <>
+      <Wrapper ref={wrapperRef}>
+        {slides.map((slide, index) => (
+          <Slider_block
+            key={index}
+            isActive={activeIndex === index}
+            onClick={() => handleClick(index)}
+            webpimageRef={slide.webp}
+            imageRef={slide.img}
+            Alt={slide.alt}
+          />
+        ))}
+      </Wrapper>
+
+      {/* Навигационные точки для мобильных */}
+      <NavigationDots>
+        {slides.map((_, index) => (
+          <Dot
+            key={index}
+            $active={activeIndex === index}
+            onClick={() => handleClick(index)}
+            aria-label={`Перейти к слайду ${index + 1}`}
+          />
+        ))}
+      </NavigationDots>
+
+      <SlideCounter>
+        {activeIndex + 1} / {slides.length}
+      </SlideCounter>
+    </>
   );
 };

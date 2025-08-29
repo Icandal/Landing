@@ -17,7 +17,7 @@ const Wrapper_active_text = styled.article`
 
   @media (max-width: 480px) {
     font-size: 18px;
-    padding: 1.5rem 1rem;
+    padding: 1rem;
     line-height: 1.4;
   }
 `;
@@ -31,13 +31,13 @@ const CardTitle = styled.h2`
   padding: 0 1.5rem;
 
   @media (max-width: 768px) {
-    font-size: 1.6rem;
-    padding: 0 1rem;
-  }
+    font-size: 1.3rem;
+  //   padding: 0 1rem;
+   }
 
   @media (max-width: 480px) {
-    font-size: 1.4rem;
-    padding: 0 0.5rem;
+    font-size: 1.5rem;
+    // padding: 0 0.5rem;
   }
 `;
 
@@ -65,6 +65,7 @@ const CardContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 100%;
   max-height: 100%;
   overflow-y: auto;

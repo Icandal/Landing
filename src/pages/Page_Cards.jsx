@@ -91,16 +91,15 @@ const FadeContainer = styled.div`
 
 const Wrapper = styled.section`
   position: static;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.75rem;
+  display: flex;
+  flex-direction: column;
   padding: 1rem;
-  width: 100%;
-  margin-top: 1rem;
+  // width: 100%;
+  margin: 0rem;
 
   @media (min-width: 768px) {
     position: absolute;
-    right: 2rem;
+    right: 0.5rem;
     top: 2rem;
     bottom: auto;
     display: flex;
