@@ -121,6 +121,7 @@ const Sidebar = styled.div`
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
+  margin-left: 1rem;
   
   @media (min-width: 768px) {
     width: 28%;
