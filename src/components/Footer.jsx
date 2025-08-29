@@ -107,7 +107,7 @@ export const Footer = () => {
       </FooterContent>
 
       <Copyright>
-        &copy; {new Date().getFullYear()} Название компании. Все права защищены.
+        &copy; {new Date().getFullYear()} Мастерская Жанны. Все права защищены.
       </Copyright>
     </FooterContainer>
   );
