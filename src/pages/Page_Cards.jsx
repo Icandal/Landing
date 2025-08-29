@@ -25,7 +25,7 @@ const PageTitle = styled.h1`
   font-size: 2.5rem;
   text-align: center;
   color: rgb(1, 37, 68);
-  margin: 2rem 0 1rem 0;
+  margin: 0.5rem 1rem;
   font-weight: bold;
   line-height: 1.2;
   

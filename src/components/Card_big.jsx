@@ -47,7 +47,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   align-items: center;
   gap: 1rem;
-  margin: 0 auto;
+  margin: 0 1rem 1rem;
 
   @media (max-width: 1024px) {
     width: 80vw;
