@@ -9,32 +9,54 @@ const fadeIn = keyframes`
 
 const ScrollButton = styled.button`
   position: fixed;
-  bottom: 95px;
+  bottom: 80px;
   right: 10px;
-  width: 50px;
-  height: 50px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
+  background-color: white;
   color: black;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-  transition: all 0.3s ease;
-  animation: ${fadeIn} 0.3s ease;
+  box-shadow: 0 2px 5px rgba(1, 37, 68, 0.3);
+  transition: all 0.2s ease;
+  animation: ${fadeIn} 0.2s ease;
   z-index: 1000;
   opacity: ${({ $visible }) => ($visible ? '1' : '0')};
   visibility: ${({ $visible }) => ($visible ? 'visible' : 'hidden')};
+  font-size: 1.2rem;
 
   &:hover {
-    background-color: lightgrey;
-    transform: scale(1.1);
+    background-color: rgb(221, 225, 2);
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(1, 37, 68, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    width: 40px;
+    height: 40px;
+    bottom: 70px;
+    right: 8px;
+    font-size: 1.1rem;
+  }
+
+  @media (max-width: 480px) {
+    width: 36px;
+    height: 36px;
+    bottom: 60px;
+    right: 6px;
+    font-size: 1rem;
   }
 `;
 
@@ -43,7 +65,9 @@ export const Arrow_up = () => {
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 150) {
+      // Show button earlier on mobile for better UX
+      const threshold = window.innerWidth < 768 ? 100 : 150;
+      if (window.pageYOffset > threshold) {
         setIsVisible(true);
       } else {
         setIsVisible(false);
@@ -51,7 +75,6 @@ export const Arrow_up = () => {
     };
 
     window.addEventListener('scroll', toggleVisibility);
-
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 

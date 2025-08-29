@@ -3,9 +3,9 @@ import './Page.css';
 import { WelcomeAnimation } from '../components/Welcome_animation';
 
 export const Page_Home = forwardRef((props, ref) => {
-
   return (
-    <div className="Page">
-        <WelcomeAnimation />
-    </div>
-)});
+    <section ref={ref} className="Page Page--no-scroll">
+      <WelcomeAnimation />
+    </section>
+  )
+});

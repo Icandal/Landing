@@ -6,5 +6,5 @@ export const Circled_image = styled.img`
   border-radius: 50%;
   object-fit: cover;
   display: block;
-  // box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
 `;

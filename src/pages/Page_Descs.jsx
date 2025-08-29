@@ -16,10 +16,7 @@ export const Page_Descs = forwardRef((props, ref) => {
     return (
         <section ref={ref} className='Page'>
             <Wrapper>
-                {[...Array(3)].map((_, index) => (
-                    <Card_big
-                    key={`card-big-${index}`} />
-                    ))}  
+                <Card_big />
             </Wrapper>
         </section>
     )

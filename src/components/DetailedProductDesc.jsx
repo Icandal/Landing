@@ -1,13 +1,17 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-const Inf = styled.p`
-  max-width: 500px;
-  padding: 1rem 0;`;
+const CardListWrapper = styled.ul`
+  margin: 1rem auto;
+  max-height: 700px;
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  font-size: 20px;  
+`;
 
 export const DetailedProductDesc = () => {
     return (
-        <Inf>
-            Some detailed description of the product
-        </Inf>
-    )
+        <CardListWrapper>
+            Каждый «жучок/паучок/ящерка» проходят трех этапный марафон по растворам. А вот рецепт этих растворов и  граммовка у каждого мастера своя.
+        </CardListWrapper>
+    );
 };

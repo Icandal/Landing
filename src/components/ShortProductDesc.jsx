@@ -1,13 +1,15 @@
 import styled from 'styled-components'
 
-const Inf = styled.p`
-  max-width: 500px;
-  padding: 1rem 0;`;
+const CARD_NAME_WRAPPER = styled.h4`
+font-weight: 600;
+font-size: 21px;
+margin: 1rem auto;
+`
 
-export const ShortProductDesc = () => {
+export const ShortProductDesc = ({Cards_name}) => {
     return (
-        <Inf>
-            Some short description of the product
-        </Inf>
+        <CARD_NAME_WRAPPER>
+            {Cards_name}
+        </CARD_NAME_WRAPPER>
     )
 };

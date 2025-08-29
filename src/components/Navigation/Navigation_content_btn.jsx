@@ -14,12 +14,12 @@ export const NavContentBtn = styled.button`
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: lightgrey;
+    background-color: rgb(221, 225, 2);
     transform: scale(1.1);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0 3px rgba(1, 37, 68, 0.1);
   }
 `;

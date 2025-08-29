@@ -1,11 +1,13 @@
 import styled from "styled-components";
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
+// import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from "react-icons/fa";
 
 const FooterContainer = styled.footer`
-  background-color: black;
+  background-color: rgb(1, 37, 68);
   color: white;
   padding: 0.5rem 0;
   margin-top: 3rem;
+  position: relative;
+  z-index: 2; 
 `;
 
 const FooterContent = styled.div`
@@ -15,32 +17,35 @@ const FooterContent = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 2rem;
   padding: 0 1rem;
+  align-items: start;
 `;
 
 const FooterSection = styled.section`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   h3 {
     color: #f1c40f;
     margin-bottom: 1rem;
     font-size: 1.2rem;
-    
+    min-height: 3rem;  
+    display: flex;
+    align-items: flex-end; 
+    padding-bottom: 0.5rem;
+  }
+
+  p, ul {
+    margin-top: 0;
+    flex-grow: 1;
   }
 
   ul {
     list-style: none;
     padding: 0;
-
+    
     li {
       margin-bottom: 0.8rem;
-
-      a {
-        color: #bdc3c7;
-        text-decoration: none;
-        transition: color 0.3s;
-
-        &:hover {
-          color: #f1c40f;
-        }
-      }
     }
   }
 `;
@@ -83,12 +88,12 @@ export const Footer = () => {
         <FooterSection>
           <h3>Контакты</h3>
           <ul>
-            <li>г. Москва, ул. Примерная, 123</li>
+            <li>г. Нижний Новгород</li>
             <li>info@example.com</li>
-            <li>+7 (123) 456-78-90</li>
+            <li>+7 (964) 835-30-90</li>
           </ul>
         </FooterSection>
-
+{/* 
         <FooterSection>
           <h3>Социальные сети</h3>
           <p>Подпишитесь на наши соцсети, чтобы быть в курсе новостей.</p>
@@ -98,7 +103,7 @@ export const Footer = () => {
             <a href="#"><FaInstagram /></a>
             <a href="#"><FaLinkedin /></a>
           </SocialIcons>
-        </FooterSection>
+        </FooterSection> */}
       </FooterContent>
 
       <Copyright>

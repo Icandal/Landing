@@ -1,14 +1,37 @@
 .Page {
-margin: 2rem auto;
-width: 88vw;
-height: 85vh;
-max-height: 85vh;
-padding: 0.5rem;
-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-border-radius: 8px;
+  margin: 2rem auto;
+  width: 88vw;
+  height: 100vh;
+  padding: 0.5rem;
+  /* box-shadow: 0 4px 8px 0 rgba(1, 37, 68, 0.2); */
+  border-radius: 8px;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
+.Page--no-scroll {
+  overflow: hidden !important;
+}
 
-display: flex;
-justify-content: center;
-align-items: center;
+@media (max-width: 768px) {
+  .Page {
+    width: 95vw;
+    height: 90vh;
+    max-height: 90vh;
+    margin: 1rem auto;
+    padding: 0.25rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .Page {
+    width: 98vw;
+    height: 95vh;
+    max-height: 95vh;
+    margin: 0.5rem auto;
+    padding: 0.1rem;
+    border-radius: 4px;
+  }
 }

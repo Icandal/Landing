@@ -11,10 +11,10 @@ cursor: pointer;
 border: none;
 transition: all 0.3s ease;
 animation: fadeIn 0.3s ease;
-box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
 
 &:hover {
-background-color: lightgrey;
+background-color: rgb(221, 225, 2);
 transform: scale(1.1);
 }
 `;

@@ -23,6 +23,11 @@ const fadeIn = keyframes`
   to { opacity: 1; transform: translateY(0); }
 `;
 
+const textAppear = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
 const PageContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -39,6 +44,14 @@ const CenteredContent = styled.div`
   transform: translate(-50%, -50%);
   width: 80%;
   text-align: center;
+
+  @media (max-width: 768px) {
+    width: 90%;
+  }
+
+  @media (max-width: 480px) {
+    width: 95%;
+  }
 `;
 
 const WelcomeText = styled.div`
@@ -51,11 +64,23 @@ const WelcomeText = styled.div`
   word-wrap: break-word;
   margin-bottom: 2rem;
   position: relative;
-  display: inline-block;
+
+  @media (max-width: 768px) {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    margin-bottom: 1rem;
+  }
 `;
 
-const Cursor = styled.span`
-  opacity: 1;
+const TextSpan = styled.span`
+  opacity: 0;
+  animation: ${textAppear} 0.3s forwards;
+  animation-delay: ${props => props.delay}ms;
 `;
 
 const ProgressBarContainer = styled.div`
@@ -66,11 +91,16 @@ const ProgressBarContainer = styled.div`
   margin: 0 auto;
   overflow: hidden;
   position: relative;
+
+  @media (max-width: 480px) {
+    width: 160px;
+    height: 8px;
+  }
 `;
 
 const ProgressBarFill = styled.div`
   height: 100%;
-  background: linear-gradient(90deg, #4cc9f0, #4361ee);
+  background: linear-gradient(90deg, #e6d600ff, rgba(0, 75, 141, 1));
   border-radius: 5px;
   width: ${props => props.fillWidth}%;
   ${props => props.filling && css`
@@ -85,7 +115,7 @@ const ArrowButton = styled.button`
   margin-top: 30px;
   background: transparent;
   border: none;
-  color: #4361ee;
+  color: rgba(0, 75, 141, 1);
   font-size: 24px;
   cursor: pointer;
   animation: 
@@ -93,10 +123,10 @@ const ArrowButton = styled.button`
     ${bounce} 2s infinite 0.5s;
   transition: all 0.3s ease;
   padding: 15px;
-  border-radius: 50%;
+  border-radius: 8px;
   opacity: 0;
   filter: drop-shadow(0 4px 8px rgba(67, 97, 238, 0.2));
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
   
   &:hover {
     color: #3a56d4;
@@ -112,14 +142,26 @@ const ArrowButton = styled.button`
   svg {
     display: block;
   }
+
+  @media (max-width: 768px) {
+    font-size: 20px;
+    padding: 12px;
+    margin-top: 25px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 18px;
+    padding: 10px;
+    margin-top: 20px;
+  }
 `;
 
 export const WelcomeAnimation = () => {
-  const [text, setText] = useState('');
+  const [visibleChars, setVisibleChars] = useState(0);
   const [phase, setPhase] = useState(0);
   const [progress, setProgress] = useState(0);
   const pageRef = useRef(null);
-  const fullText = "Добро пожаловать! Здесь вы сможете ознакомиться с нашим продуктом и найти контакты для связи с нами! Мы подготовили несколько карточек для вас, начнем?";
+  const fullText = "Добро пожаловать! Здесь вы сможете ознакомиться с моими работами и найти контакты для связи со мной! Я подготовила несколько карточек для вас, чтобы познакомиться. Начнем?";
 
   const scrollDown = () => {
     window.scrollBy({
@@ -130,10 +172,10 @@ export const WelcomeAnimation = () => {
 
   useEffect(() => {
     if (phase === 0) {
-      if (text.length < fullText.length) {
+      if (visibleChars < fullText.length) {
         const timeout = setTimeout(() => {
-          setText(fullText.substring(0, text.length + 1));
-        }, 60);
+          setVisibleChars(prev => prev + 1);
+        }, 30);
         return () => clearTimeout(timeout);
       } else {
         setPhase(1);
@@ -150,14 +192,21 @@ export const WelcomeAnimation = () => {
         }, 500);
       }
     }
-  }, [text, phase, progress]);
+  }, [visibleChars, phase, progress]);
 
   return (
     <PageContainer ref={pageRef}>
       <CenteredContent>
         <WelcomeText>
-          {text}
-          <Cursor>|</Cursor>
+          {fullText.split('').map((char, index) => (
+            <TextSpan 
+              key={index} 
+              delay={index * 30}
+              style={{ opacity: index < visibleChars ? 1 : 0 }}
+            >
+              {char}
+            </TextSpan>
+          ))}
         </WelcomeText>
         
         {(phase === 1 || phase === 2) && (
@@ -171,7 +220,7 @@ export const WelcomeAnimation = () => {
             </ProgressBarContainer>
             {phase === 2 && (
               <ArrowButton onClick={scrollDown} aria-label="Scroll down">
-                <FaArrowDown />
+                Начать!
               </ArrowButton>
             )}
           </>

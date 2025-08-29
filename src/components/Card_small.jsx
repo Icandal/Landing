@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 import { Circled_image } from './Circled_image';
-import icecreameImage from '../assets/Icecreame.png'
 
-const Wrapper = styled.section`
+const Wrapper_inactive = styled.section`
+  cursor: pointer;
   border: none;
-  border-radius: 8px;
-  padding: 2rem;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  min-width: 150px;
-  max-width: 250px;
-  max-heigth: 250px;
+  // box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
   margin: 1rem auto;
+
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex-fllow: row nowrap;
+  flex-direction: row;
+  align-items: flex-end;
   transition: all 0.3s ease;
 
 ${Circled_image} {
@@ -23,18 +20,22 @@ ${Circled_image} {
 
 &:hover {
 transform: scale(1.2);
+
+${Circled_image}{
+box-shadow: 0 4px 8px 0 rgb(246, 254, 8);
+}
 }
 `;
 
-
-
-
-export const Card_small = () => {
+export const Card_small = ({ imageRef, Cards_name, index, WebPImage}) => {
 
   return (
-    <Wrapper>
-      <Circled_image src={icecreameImage} alt='Icecreame' />
-      <p>Sample text</p>
-    </Wrapper>
+    <Wrapper_inactive>
+      <picture>
+      <source srcSet={WebPImage} type='image/webp' />
+      <source srcSet={imageRef} type='image/png' />
+      <Circled_image src={imageRef} alt={Cards_name} loading="lazy" />
+      </picture>
+    </Wrapper_inactive>
   );
 };

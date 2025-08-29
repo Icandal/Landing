@@ -11,22 +11,34 @@ import { Nav_to_order } from "./Navigate_to_order";
 const Container = styled.div`
   position: fixed;
   right: 0.4rem;
-  bottom: 24vh;
+  bottom: 30vh;
   border-radius: 16px;
   width: 4rem;
-  height: 30vw;
+  height: auto;
+  max-height: 70vh;
   border: none;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  z-index: 1000;
+  box-shadow: 0 4px 8px 0 rgba(1, 37, 68, 0.2);
+  z-index: 1001;
   overflow: hidden;
   opacity: ${({ $isVisible }) => ($isVisible ? "1" : "0")};
   transform: ${({ $isVisible }) => ($isVisible ? "translateX(0)" : "translateX(100%)")};
   transition: all 0.3s ease;
-
   display: flex;
   flex-direction: column;
+  background: white;
+  gap: 0.5rem;
+  padding: 0.5rem 0;
 
-  
+  @media (max-width: 768px) {
+    width: 3.5rem;
+    bottom: 30vh;
+  }
+
+  @media (max-width: 480px) {
+    width: 3rem;
+    bottom: 30vh;
+    border-radius: 12px;
+  }
 `;
 
 export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, sliderRef, orderRef}) => {
@@ -41,8 +53,8 @@ export const Navigation_panel = ({ homeRef, aboutRef, descsRef, cardsRef, slider
       behavior: 'smooth',
       block: 'start'
     });
-  setIsVisible(false);
-};
+    setIsVisible(false);
+  };
 
   return (
     <nav>
