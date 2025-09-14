@@ -8,3 +8,5 @@ export const Circled_image = styled.img`
   display: block;
   box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
 `;
+
+

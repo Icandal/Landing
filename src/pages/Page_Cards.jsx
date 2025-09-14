@@ -1,7 +1,7 @@
 import './Page.css';
 import styled, { keyframes } from 'styled-components';
 import { Card_small } from '../components/Card_small';
-import { forwardRef, useState } from 'react';
+import { forwardRef, useState, useRef, useEffect } from 'react';
 import icecreameImage from '../assets/Icecreame.png';
 import iceCreameImageWP from '../assets/Icecreame.webp'
 import { Active_card_small } from '../components/Active_card_small';
@@ -15,6 +15,7 @@ import Vulpes_cor from '../assets/Sliders_assets/Vulpes_heart.png';
 import WEBVulpes_cor from '../assets/Sliders_assets/WEBP/Vulpes_heart.webp';
 import Turtle from '../assets/Sliders_assets/Turtle.png';
 import WEBTurtle from '../assets/Sliders_assets/WEBP/Turtle.webp';
+import { PushUp } from '../components/PushUp';
 
 const fadeIn = keyframes`
   from { opacity: 0; }
@@ -149,7 +150,6 @@ const CardWrapper = styled.div`
       transform: scale(1.03);
     }
     
-    // Уменьшаем размер неактивных карточек
     ${props => !props.$isActive && `
       transform: scale(0.85);
       margin-left: auto;
@@ -161,7 +161,6 @@ const CardWrapper = styled.div`
   }
 
   @media (max-width: 767px) {
-    // На мобильных уменьшаем неактивные карточки
     ${props => !props.$isActive && `
       transform: scale(0.8);
     `}
@@ -171,6 +170,7 @@ const CardWrapper = styled.div`
 export const Page_Cards = forwardRef((props, ref) => {
     const [activeIndex, setActiveIndex] = useState(0);
     const [fadeKey, setFadeKey] = useState(0);
+    const [isVisiblePushUp, setIsVisiblePushUp] = useState(false);
     
     const cardsData = [
         { id: 0, title: "Черный азиатский скорпион", description: "Прозрачная шкатулка с откидным верхом позволяет рассмотреть экспонат со всех сторон и даже достать его себе на ладонь", price: "5000 ₽", image: Scorp, WebPImage: WEBScorp },
@@ -180,6 +180,14 @@ export const Page_Cards = forwardRef((props, ref) => {
         { id: 4, title: "Семенник бурого медведя", description: "Коллекционная редкость. Реальный семенник мишутки, был кастрирован по необходимости.", price: "25000 ₽", image: Ursus, WebPImage: WEBUrsus }
     ];
 
+    const handlePushUp = () => {
+        setIsVisiblePushUp(true);
+    };
+
+    const handleClosePushUp = () => {
+        setIsVisiblePushUp(false);
+    };
+
     const handleCardClick = (index) => {
         if (index !== activeIndex) {
             setFadeKey(prev => prev + 1);
@@ -187,16 +195,24 @@ export const Page_Cards = forwardRef((props, ref) => {
         }
     };
 
+    const IRef = cardsData[activeIndex].image;
+
     return (
       <>
-      <PageTitle>Что вы можете заказать сейчас?</PageTitle>
+        {isVisiblePushUp && (
+          <PushUp 
+            imgRef={IRef} 
+            onClose={handleClosePushUp}
+          />
+        )}
+        <PageTitle>Что вы можете заказать сейчас?</PageTitle>
         <section ref={ref} className="Page" style={{ position: 'relative', padding: '0.5rem', minHeight: '100vh' }}>
           <PageContainer>
             <MainContent>
-              <Wrapper_active>
+              <Wrapper_active onClick={handlePushUp}>
                   <FadeContainer key={fadeKey}>
                       <Active_card_small 
-                          imageRef={cardsData[activeIndex].image} 
+                          imageRef={IRef}
                           Cards_name={cardsData[activeIndex].title} 
                           ACTIVE_CARD_TEXT={cardsData[activeIndex].description}
                           price={cardsData[activeIndex].price}
@@ -204,7 +220,7 @@ export const Page_Cards = forwardRef((props, ref) => {
                       />
                   </FadeContainer>
               </Wrapper_active>
-            </MainContent>
+            </MainContent>  
             
             <Sidebar>
                 {cardsData.map((card, index) => (

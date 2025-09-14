@@ -93,6 +93,16 @@ const ImageContainer = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0.5rem 0;
+  transition: 0.2s ease;
+
+    &:hover {
+    cursor: pointer;
+    transform: scale(1.1);
+    ${Circled_image} {
+      box-shadow: 0 4px 8px 0 rgb(246, 254, 8);
+    }
+  }
+
 `;
 
 export const Active_card_small = ({ imageRef, Cards_name, ACTIVE_CARD_TEXT, price, WebPImage }) => {
