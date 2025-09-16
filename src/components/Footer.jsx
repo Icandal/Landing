@@ -89,7 +89,7 @@ export const Footer = () => {
           <h3>Контакты</h3>
           <ul>
             <li>г. Нижний Новгород</li>
-            <li>info@example.com</li>
+            <li>zhanna2810@icloud.com</li>
             <li>+7 (964) 835-30-90</li>
           </ul>
         </FooterSection>

@@ -2,15 +2,13 @@ import './Page.css';
 import styled, { keyframes } from 'styled-components';
 import { Card_small } from '../components/Card_small';
 import { forwardRef, useState, useRef, useEffect } from 'react';
-import icecreameImage from '../assets/Icecreame.png';
-import iceCreameImageWP from '../assets/Icecreame.webp'
 import { Active_card_small } from '../components/Active_card_small';
 import Scorp from '../assets/Sliders_assets/image.png';
 import WEBScorp from '../assets/Sliders_assets/WEBP/image.webp';
 import Ursus from '../assets/Sliders_assets/Ursus.png';
 import WEBUrsus from '../assets/Sliders_assets/WEBP/Ursus.webp';
-import Vulpes from '../assets/Sliders_assets/Vulpes_bottles.png';
-import WEBVulpes from '../assets/Sliders_assets/WEBP/Vulpes_bottles.webp';
+import Vulpes from '../assets/Sliders_assets/Frankenstein.jpg';
+import WEBVulpes from '../assets/Sliders_assets/WEBP/Frankenstein.webp';
 import Vulpes_cor from '../assets/Sliders_assets/Vulpes_heart.png';
 import WEBVulpes_cor from '../assets/Sliders_assets/WEBP/Vulpes_heart.webp';
 import Turtle from '../assets/Sliders_assets/Turtle.png';
