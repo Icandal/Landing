@@ -1,34 +1,41 @@
 .Page {
-  /* margin: 2rem auto;
-  width: 88vw;
-  padding: 0.5rem; */
-  /* box-shadow: 0 4px 8px 0 rgba(1, 37, 68, 0.2); */
+  margin-top: 10rem;
+  width: auto;
+  min-height: auto;
+  height: auto;
+  padding: 0.5rem;
+  box-shadow: 0 4px 8px 0 rgba(1, 37, 68, 0.2);
   border-radius: 8px;
-  overflow: auto;
+  overflow: visible;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
-.Page--no-scroll {
-  overflow: hidden !important;
+.Wrapper_active {
+  min-height: auto;
+  height: auto;
 }
+
 
 @media (max-width: 768px) {
   .Page {
-    width: 95vw;
-    height: 90vh;
-    max-height: 90vh;
+    width: auto;
+    height: auto;
+    max-height: none;
     margin: 1rem auto;
     padding: 0.25rem;
+  }
+  
+  .Wrapper_active {
+    min-height: auto;
+    height: auto;
   }
 }
 
 @media (max-width: 480px) {
   .Page {
-    width: 98vw;
-    height: 95vh;
-    max-height: 95vh;
+    width: auto;
+    height: auto;
     margin: 0.5rem auto;
     padding: 0.1rem;
     border-radius: 4px;
