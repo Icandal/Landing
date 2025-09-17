@@ -58,7 +58,7 @@ const Container = styled.article`
 
 const StyledCircledImage = styled(Circled_image)`
   margin-bottom: -75px;
-  z-index: 2;
+  z-index: 3;
 
   @media (max-width: 768px) {
     margin-bottom: -60px;

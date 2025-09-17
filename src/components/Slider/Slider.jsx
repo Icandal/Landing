@@ -32,86 +32,57 @@ const Wrapper = styled.section`
 
   @media (max-width: 768px) {
     margin: auto 0.5rem;
-    height: 350px;
-    gap: 4px;
-    overflow-x: auto;
+    height: auto;
+    gap: 12px;
+    overflow-y: visible;
     justify-content: flex-start;
     padding: 0.5rem;
-    
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    
-    scroll-snap-type: x mandatory;
-    scroll-padding: 0 50%;
+    flex-direction: column;
   }
 
   @media (max-width: 480px) {
     margin: auto 0.25rem;
-    height: 300px;
-    gap: 3px;
+    gap: 10px;
     padding: 0.25rem;
   }
 
   @media (max-width: 360px) {
-    height: 280px;
-    gap: 2px;
-  }
-`;
-
-const NavigationDots = styled.div`
-  display: none;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 1rem;
-  padding: 0.5rem;
-
-  @media (max-width: 768px) {
-    display: flex;
-  }
-
-  @media (max-width: 480px) {
     gap: 8px;
-    margin-top: 0.5rem;
-    padding: 0.25rem;
   }
 `;
 
-const Dot = styled.button`
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  border: none;
-  background-color: ${props => props.$active ? '#333' : '#ccc'};
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  &:hover {
-    background-color: ${props => props.$active ? '#333' : '#aaa'};
-  }
-
-  @media (max-width: 480px) {
-    width: 8px;
-    height: 8px;
-  }
-`;
-
-const SlideCounter = styled.div`
+const MobileImage = styled.div`
   display: none;
-  font-size: 14px;
-  color: #666;
-  font-weight: 500;
-  margin-top: 0.5rem;
-  text-align: center;
-
+  
   @media (max-width: 768px) {
     display: block;
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    
+    img {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 16px;
+    }
   }
 
   @media (max-width: 480px) {
-    font-size: 12px;
+    border-radius: 12px;
+    
+    img {
+      border-radius: 12px;
+    }
+  }
+
+  @media (max-width: 360px) {
+    border-radius: 10px;
+    
+    img {
+      border-radius: 10px;
+    }
   }
 `;
 
@@ -119,8 +90,6 @@ export const Slider = () => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const timerRef = useRef(null);
-  const wrapperRef = useRef(null);
-  const isScrollingRef = useRef(false);
 
   const goToNextSlide = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % 7);
@@ -134,80 +103,14 @@ export const Slider = () => {
     timerRef.current = setTimeout(goToNextSlide, 10000);
   };
 
-  // Функция для центрирования слайда
-  const centerSlide = useCallback((index) => {
-    if (!wrapperRef.current || !isMobile) return;
-    
-    const slideElement = wrapperRef.current.children[index];
-    if (!slideElement) return;
-    
-    const slideLeft = slideElement.offsetLeft;
-    const slideWidth = slideElement.offsetWidth;
-    const containerWidth = wrapperRef.current.offsetWidth;
-    const scrollLeft = slideLeft - (containerWidth - slideWidth) / 2;
-    
-    isScrollingRef.current = true;
-    wrapperRef.current.scrollTo({
-      left: scrollLeft,
-      behavior: 'smooth'
-    });
-    
-    // Сбрасываем флаг после завершения скролла
-    setTimeout(() => {
-      isScrollingRef.current = false;
-    }, 500);
-  }, [isMobile]);
-
   const handleClick = (index) => {
     setActiveIndex(index);
     resetTimer();
-    centerSlide(index);
   };
-
-  // Обработчик скролла для определения активного слайда
-  const handleScroll = useCallback(() => {
-    if (!wrapperRef.current || !isMobile || isScrollingRef.current) return;
-    
-    const container = wrapperRef.current;
-    const scrollLeft = container.scrollLeft;
-    const containerWidth = container.offsetWidth;
-    
-    let closestIndex = 0;
-    let minDistance = Infinity;
-    
-    // Находим слайд, ближайший к центру контейнера
-    Array.from(container.children).forEach((slide, index) => {
-      const slideLeft = slide.offsetLeft;
-      const slideWidth = slide.offsetWidth;
-      const slideCenter = slideLeft + slideWidth / 2;
-      const containerCenter = scrollLeft + containerWidth / 2;
-      const distance = Math.abs(slideCenter - containerCenter);
-      
-      if (distance < minDistance) {
-        minDistance = distance;
-        closestIndex = index;
-      }
-    });
-    
-    if (closestIndex !== activeIndex) {
-      setActiveIndex(closestIndex);
-      resetTimer();
-    }
-  }, [activeIndex, isMobile, resetTimer]);
-
-  useEffect(() => {
-    centerSlide(activeIndex);
-  }, [activeIndex, centerSlide]);
 
   useEffect(() => {
     const checkMobile = () => {
-      const mobile = window.innerWidth <= 768;
-      setIsMobile(mobile);
-      
-      // При изменении размера окна, перецентрируем активный слайд
-      if (mobile) {
-        centerSlide(activeIndex);
-      }
+      setIsMobile(window.innerWidth <= 768);
     };
 
     checkMobile();
@@ -216,20 +119,7 @@ export const Slider = () => {
     return () => {
       window.removeEventListener('resize', checkMobile);
     };
-  }, [activeIndex, centerSlide]);
-
-  useEffect(() => {
-    const wrapper = wrapperRef.current;
-    if (isMobile && wrapper) {
-      wrapper.addEventListener('scroll', handleScroll);
-    }
-    
-    return () => {
-      if (wrapper) {
-        wrapper.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, [isMobile, handleScroll]);
+  }, []);
 
   useEffect(() => {
     resetTimer();
@@ -252,34 +142,29 @@ export const Slider = () => {
 
   return (
     <>
-      <Wrapper ref={wrapperRef}>
-        {slides.map((slide, index) => (
-          <Slider_block
-            key={index}
-            isActive={activeIndex === index}
-            onClick={() => handleClick(index)}
-            webpimageRef={slide.webp}
-            imageRef={slide.img}
-            Alt={slide.alt}
-          />
-        ))}
+      <Wrapper>
+        {isMobile ? (
+          slides.map((slide, index) => (
+            <MobileImage key={index}>
+              <picture>
+                <source srcSet={slide.webp} type="image/webp" />
+                <img src={slide.img} alt={slide.alt} />
+              </picture>
+            </MobileImage>
+          ))
+        ) : (
+          slides.map((slide, index) => (
+            <Slider_block
+              key={index}
+              isActive={activeIndex === index}
+              onClick={() => handleClick(index)}
+              webpimageRef={slide.webp}
+              imageRef={slide.img}
+              Alt={slide.alt}
+            />
+          ))
+        )}
       </Wrapper>
-
-      {/* Навигационные точки для мобильных */}
-      <NavigationDots>
-        {slides.map((_, index) => (
-          <Dot
-            key={index}
-            $active={activeIndex === index}
-            onClick={() => handleClick(index)}
-            aria-label={`Перейти к слайду ${index + 1}`}
-          />
-        ))}
-      </NavigationDots>
-
-      <SlideCounter>
-        {activeIndex + 1} / {slides.length}
-      </SlideCounter>
     </>
   );
 };

@@ -25,22 +25,11 @@ const PageTitle = styled.h1`
 const SliderContainer = styled.div`
   width: 100%;
   height: 100%;
-  
-  @media (max-width: 768px) {
-    max-height: 60vh;
-    overflow-y: auto;
-    
-    &::-webkit-scrollbar {
-      display: none;
-    }
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
 `;
 
 const ContentContainer = styled.div`
-display: flex;
-flex-direction: column;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Page_Slider = forwardRef((props, ref) => {
@@ -48,14 +37,13 @@ export const Page_Slider = forwardRef((props, ref) => {
     <>
       <section ref={ref} className="Page Page--no-scroll">
         <ContentContainer>
-      <PageTitle>Какие еще работы у меня были?</PageTitle>
-      
-        <SliderContainer>
-          <Slider />
-        </SliderContainer>
-      </ContentContainer>  
+          <PageTitle>Какие еще работы у меня были?</PageTitle>
+          
+          <SliderContainer>
+            <Slider />
+          </SliderContainer>
+        </ContentContainer>  
       </section>
-      
     </>
   )
 });
