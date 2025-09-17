@@ -27,6 +27,8 @@ const PageTitle = styled.h1`
   margin: 0.5rem 1rem;
   font-weight: bold;
   line-height: 1.2;
+  display: flex;
+  flex-direction: column;
   
   @media (max-width: 768px) {
     font-size: 2rem;
@@ -115,18 +117,18 @@ const MainContent = styled.div`
 const Sidebar = styled.div`
   width: 100%;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.5rem;
-  margin-top: 1rem;
-  margin-left: 1rem;
+  align-items: center;
+  gap: 1rem;
+  margin-top: auto;
   
-  @media (min-width: 768px) {
+  @media (max-width: 768px) {
     width: 28%;
     flex-direction: column;
     align-items: flex-end;
-    margin-top: 0;
+    flex-wrap: wrap;
+    margin-top: 0rem;
     padding-top: 0.5rem;
   }
 `;
@@ -135,6 +137,7 @@ const CardWrapper = styled.div`
   cursor: pointer;
   transition: transform 0.2s ease;
   width: 150px;
+  margin-top: auto;
 
   &:active {
     transform: scale(0.98);
@@ -163,6 +166,10 @@ const CardWrapper = styled.div`
       transform: scale(0.8);
     `}
   }
+`;
+
+const ContentContainer = styled.div`
+
 `;
 
 export const Page_Cards = forwardRef((props, ref) => {
@@ -202,11 +209,11 @@ export const Page_Cards = forwardRef((props, ref) => {
             imgRef={IRef} 
             onClose={handleClosePushUp}
           />
-        )}
-        <PageTitle>Что вы можете заказать сейчас?</PageTitle>
-        <section ref={ref} className="Page" style={{ position: 'relative', padding: '0.5rem', minHeight: '100vh' }}>
-          <PageContainer>
-            <MainContent>
+        )}        
+        <section ref={ref} className="Page" style={{ position: 'relative', padding: '0.5rem', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+          <PageTitle>Что вы можете заказать сейчас?</PageTitle>
+            <PageContainer>
+            <MainContent> 
               <Wrapper_active onClick={handlePushUp}>
                   <FadeContainer key={fadeKey}>
                       <Active_card_small 
@@ -217,7 +224,7 @@ export const Page_Cards = forwardRef((props, ref) => {
                           WebPImage={cardsData[activeIndex].WebPImage}
                       />
                   </FadeContainer>
-              </Wrapper_active>
+              </Wrapper_active>  
             </MainContent>  
             
             <Sidebar>
@@ -237,6 +244,7 @@ export const Page_Cards = forwardRef((props, ref) => {
                     </CardWrapper>
                 ))}
             </Sidebar>
+            
           </PageContainer>
         </section>
       </>

@@ -38,15 +38,24 @@ const SliderContainer = styled.div`
   }
 `;
 
+const ContentContainer = styled.div`
+display: flex;
+flex-direction: column;
+`;
+
 export const Page_Slider = forwardRef((props, ref) => {
   return (
     <>
-      <PageTitle>Какие еще работы у меня были?</PageTitle>
       <section ref={ref} className="Page Page--no-scroll">
+        <ContentContainer>
+      <PageTitle>Какие еще работы у меня были?</PageTitle>
+      
         <SliderContainer>
           <Slider />
         </SliderContainer>
+      </ContentContainer>  
       </section>
+      
     </>
   )
 });

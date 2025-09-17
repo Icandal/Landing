@@ -1,10 +1,10 @@
 .Page {
-  margin-top: 10rem;
+  margin-top: 5rem;
   width: auto;
   min-height: auto;
   height: auto;
   padding: 0.5rem;
-  /* box-shadow: 0 4px 8px 0 rgba(1, 37, 68, 0.2); */
+    
   border-radius: 8px;
   overflow: visible;
   display: flex;

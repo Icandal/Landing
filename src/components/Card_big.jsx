@@ -207,7 +207,7 @@ export const Card_big = () => {
 
   return (
     <>
-      <PageTitle>Как создаются мои препараты?</PageTitle>
+      <PageTitle>Как готовятся мои работы?</PageTitle>
       <Wrapper $isOpen={isOpen}>
         <ImageWrapper>
           <ImageContainer>
