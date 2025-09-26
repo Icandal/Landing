@@ -16,6 +16,7 @@ const SignUpButton = styled.button`
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 5px rgba(1, 37, 68, 0.3);
+  background-color: rgba(245, 247, 166, 1);
   transition: all 0.2s ease;
   z-index: 1000;
   font-size: 1.2rem;

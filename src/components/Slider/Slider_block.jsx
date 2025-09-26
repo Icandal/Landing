@@ -91,7 +91,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgb(242, 246, 2);
+  background-color: rgba(247, 250, 121, 1);
   mix-blend-mode: multiply;
   opacity: ${({ $isActive }) => ($isActive ? 0 : 1)};
   transition: opacity 0.3s ease;
@@ -101,7 +101,7 @@ const Overlay = styled.div`
   }
 
   @media (max-width: 480px) {
-    background: rgba(242, 246, 2, 0.8);
+    background-color: rgba(247, 250, 121, 1);
   }
 `;
 

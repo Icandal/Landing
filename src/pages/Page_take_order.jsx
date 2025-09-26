@@ -49,7 +49,7 @@ const MessengerWrapper = styled.div`
   flex-direction: column;
   gap: 16px;
   padding: 16px;
-  background: white;
+  // background: white;
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(1, 37, 68, 0.1);
   border: none;

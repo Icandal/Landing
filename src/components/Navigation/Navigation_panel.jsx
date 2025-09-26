@@ -25,7 +25,7 @@ const Container = styled.div`
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
-  background: white;
+  background-color: rgba(245, 247, 166, 1);
   gap: 0.5rem;
   padding: 0.5rem 0;
 

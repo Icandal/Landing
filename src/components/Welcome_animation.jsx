@@ -100,7 +100,7 @@ const ProgressBarContainer = styled.div`
 
 const ProgressBarFill = styled.div`
   height: 100%;
-  background: linear-gradient(90deg, #e6d600ff, rgba(0, 75, 141, 1));
+  background: linear-gradient(90deg, #ffffff7a, rgba(230, 75, 248, 1));
   border-radius: 5px;
   width: ${props => props.fillWidth}%;
   ${props => props.filling && css`
@@ -115,7 +115,7 @@ const ArrowButton = styled.button`
   margin-top: 30px;
   background: transparent;
   border: none;
-  color: rgba(0, 75, 141, 1);
+  color: rgba(72, 0, 63, 1);
   font-size: 24px;
   cursor: pointer;
   animation: 
@@ -125,11 +125,12 @@ const ArrowButton = styled.button`
   padding: 15px;
   border-radius: 8px;
   opacity: 0;
+  background-color: rgba(245, 247, 166, 1);
   filter: drop-shadow(0 4px 8px rgba(67, 97, 238, 0.2));
   box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
   
   &:hover {
-    color: #3a56d4;
+    color: #d43ad1ff;
     transform: scale(1.1);
     filter: drop-shadow(0 6px 12px rgba(67, 97, 238, 0.3));
   }

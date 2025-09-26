@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button } from './Button';
+import { Button } from './ButtonsAndPanels/Button';
 import { useState } from 'react';
 import { DetailedProductDesc } from './DetailedProductDesc';
 import { ShortProductDesc } from './ShortProductDesc';

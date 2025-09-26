@@ -21,6 +21,7 @@ const ScrollButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: rgba(245, 247, 166, 1);
   box-shadow: 0 2px 5px rgba(1, 37, 68, 0.3);
   transition: all 0.2s ease;
   animation: ${fadeIn} 0.2s ease;

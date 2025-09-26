@@ -10,6 +10,7 @@ font-size: 1rem;
 cursor: pointer;
 border: none;
 transition: all 0.3s ease;
+background-color: rgba(245, 247, 166, 1);
 animation: fadeIn 0.3s ease;
 box-shadow: 0 4px 8px 0 rgba(1, 37, 68,0.2);
 

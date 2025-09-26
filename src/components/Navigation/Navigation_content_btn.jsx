@@ -4,7 +4,7 @@ export const NavContentBtn = styled.button`
   width: 3rem;
   height: 3rem;
   color: black;
-  background-color: white;
+  background-color: rgba(245, 247, 166, 1);
   border: none;
   border-radius: 50%;
   cursor: pointer;

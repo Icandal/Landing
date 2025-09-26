@@ -8,7 +8,7 @@ const HeaderEl = styled.header`
   padding: 2rem;
   width: 85vw;
   color:  rgb(1, 37, 68);;
-  background-color: white;
+  // background: linear-gradient(to right, rgba(255, 255, 255, 1), rgba(255, 244, 96, 0.51));
   font-size: 1.4rem;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 `;
